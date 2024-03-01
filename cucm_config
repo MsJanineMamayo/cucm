@@ -1,0 +1,28 @@
+config t
+   hostname CUCM-_
+   enable secret pass
+   service password-encryption
+   no logging console
+   no ip domain-lookup
+   username admin privilege 15 secret pass
+   line console 0
+   exec-timeout 0 0
+   no login
+   line vty 0 14
+   transport input all
+   login local
+Int Vlan 1
+     no shutdown
+	 ip add 10._.1.8 255.255.255.0
+	 description MGMTDATA
+	 end
+	
+	
+config t
+  ip dhcp excluded-add 10._.1.1 10._.1.100
+  ip dhcp pool MGMTDATA
+   network 10._.1.0 255.255.255.0
+   default-router 10._.1.4
+   domain-name MGMTDATA.COM
+   dns-server 10._.1.10
+end
